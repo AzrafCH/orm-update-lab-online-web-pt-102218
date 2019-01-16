@@ -54,4 +54,17 @@ attr_reader :id
     DB[:conn].execute(sql, name).map {|row| self.new_from_db(row)}.first
   end
 
+  def save
+  if self.id
+    self.update
+  else
+    sql = <<-SQL
+      INSERT INTO students (name, genre)
+      VALUES (?, ?)
+    SQL
+    DB[:conn].execute(sql, self.name, self.genre)
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+  end
+end
+
 end
