@@ -9,7 +9,7 @@ attr_reader :id
     @id = id
   end
 
-  def.create_table
+  def self.create_table
     sql = <<-SQL
       CREATE TABLE IF NOT EXISTS students (
         id INTEGER PRIMARY KEY,
@@ -21,7 +21,7 @@ attr_reader :id
     DB[:conn].execute(sql)
   end
 
-  
+
 
 
 end
